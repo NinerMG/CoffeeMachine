@@ -7,7 +7,7 @@ public class CoffeeMachine {
     public static void main(String[] args) {
 	// write your code here
         CoffeeAdvance coffeeAdvance = new CoffeeAdvance();
-        coffeeAdvance.status();
+
         coffeeAdvance.action();
     }
 }
@@ -114,44 +114,53 @@ class CoffeeAdvance {
     }
 
     void action() {
-        System.out.println("Write action (buy, fill, take):");
-        String action = scanner.nextLine();
+
+        System.out.print("Write action (buy, fill, take, remaining, exit):");
+        String action = scanner.next();
 
         switch (action) {
             case "buy":
                 buy();
+                action();
                 break;
 
             case "fill":
                 fill();
-                status();
+                action();
                 break;
 
             case "take":
                 take();
-                status();
+                action();
                 break;
-        }
+            case "remaining":
+                status();
+                action();
+                break;
+            case "exit":
+                System.exit(0);
+         }
+
     }
 
     void buy() {
-        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-        int choice = scanner.nextInt();
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+        String choice = scanner.next();
 
         switch (choice) {
-            case 1:
+            case "1":
                 espresso();
-                status();
                 break;
 
-            case 2:
+            case "2":
                 latte();
-                status();
                 break;
 
-            case 3:
+            case "3":
                 cappuccino();
-                status();
+                break;
+            case "back":
+                action();
                 break;
         }
     }
@@ -162,13 +171,24 @@ class CoffeeAdvance {
         int moneyAmount = 4;
 
         if (water >= waterAmount && coffeeBeans >= coffeeBeansAmount && cups >=1) {
+            System.out.println("I have enough resources, making you a coffee!");
             money += moneyAmount;
             water -= waterAmount;
             coffeeBeans -= coffeeBeansAmount;
             cups -= 1;
         }
-        else
-            System.out.println("Please fill Coffee Machine!");
+        else {
+            if (water < waterAmount) {
+                System.out.println("Sorry, not enough water!");
+            }
+            else if (coffeeBeans < coffeeBeansAmount) {
+                System.out.println("Sorry, not enough coffee beans!");
+            }
+            else {
+                System.out.println("Sorry, not enough disponsable cups!");
+            }
+        }
+
     }
 
     void latte() {
@@ -178,14 +198,28 @@ class CoffeeAdvance {
         int moneyAmount = 7;
 
         if (water >= waterAmount && coffeeBeans >= coffeeBeansAmount && milk >= milkAmount && cups >=1) {
+            System.out.println("I have enough resources, making you a coffee!");
             money += moneyAmount;
             water -= waterAmount;
             milk -= milkAmount;
             coffeeBeans -= coffeeBeansAmount;
             cups -= 1;
         }
-        else
-            System.out.println("Please fill Coffee Machine!");
+        else {
+            if (water < waterAmount) {
+                System.out.println("Sorry, not enough water!");
+            }
+            else if (coffeeBeans < coffeeBeansAmount) {
+                System.out.println("Sorry, not enough coffee beans!");
+            }
+            else if (milk < milkAmount) {
+                System.out.println("Sorry, not enough milk!");
+            }
+            else {
+                System.out.println("Sorry, not enough disponsable cups!");
+            }
+        }
+
     }
 
     void cappuccino() {
@@ -195,14 +229,28 @@ class CoffeeAdvance {
         int moneyAmount = 6;
 
         if (water >= waterAmount && coffeeBeans >= coffeeBeansAmount && milk >= milkAmount && cups >=1) {
+            System.out.println("I have enough resources, making you a coffee!");
             money += moneyAmount;
             water -= waterAmount;
             milk -= milkAmount;
             coffeeBeans -= coffeeBeansAmount;
             cups -= 1;
         }
-        else
-            System.out.println("Please fill Coffee Machine!");
+        else {
+            if (water < waterAmount) {
+                System.out.println("Sorry, not enough water!");
+            }
+            else if (coffeeBeans < coffeeBeansAmount) {
+                System.out.println("Sorry, not enough coffee beans!");
+            }
+            else if (milk < milkAmount) {
+                System.out.println("Sorry, not enough milk!");
+            }
+            else {
+                System.out.println("Sorry, not enough disponsable cups!");
+            }
+        }
+
     }
 
     void fill() {
